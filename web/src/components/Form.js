@@ -3,7 +3,7 @@ import { InputStyles } from '../styles/InputStyles';
 import { SelectStyles } from '../styles/SelectStyles';
 import { FormStyles } from '../styles/ComponentStyles';
 
-export default function Form() {
+export default function Form({onSubmit}) {
   const [state, setState] = useState({
     description: '',
     amount: 0,
@@ -19,21 +19,38 @@ export default function Form() {
     });
   }
 
+  function reset(){
+    setState({
+      ...state,
+      description: '',
+      amount: 0,
+    })
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    onSubmit(state, reset)
+  }
+
   return (
     <>
-      <FormStyles>
+      <FormStyles onSubmit={handleSubmit}>
         <InputStyles
           type='text'
           placeholder='description'
           name='description'
           value={state.description}
+          required={true}
           onChange={handleChange}
         />
         <InputStyles
           type='number'
+          min={0.01}
+          step={0.01}
           placeholder='amount'
           name='amount'
           value={state.amount}
+          required={true}
           onChange={handleChange}
         />
         <SelectStyles
