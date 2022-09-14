@@ -99,6 +99,12 @@ Run the python tests:
 cd python && pytest tests.py
 ```
 
+Initialize DB:
+```shell
+cd python && python db_init.py
+```
+
+
 Run the API (http://localhost:5000):
 
 ```shell
